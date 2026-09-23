@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://vkr87ofhduse"]
+
+[ext_resource type="Texture2D" uid="uid://j82f7i5857sj" path="res://assets/ui/icons/items/cheapskate_helm_icon.png" id="1_rru7r"]
+[ext_resource type="Script" uid="uid://b1csalha2y0y5" path="res://data_classes/item.gd" id="2_pl3ec"]
+
+[resource]
+script = ExtResource("2_pl3ec")
+id = &"1"
+display_name = "Cheapskate Helm"
+icon = ExtResource("1_rru7r")
+description = "Reduces costs of all casino games by 1g."
+slot = 2
+value = 50
+metadata/_custom_type_script = "uid://b1csalha2y0y5"

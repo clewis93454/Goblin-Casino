@@ -1,20 +1,94 @@
 [gd_scene format=3 uid="uid://cwk8ne3igw7ql"]
 
+[ext_resource type="Script" uid="uid://bqajyfn06xk1u" path="res://ui/ui.gd" id="1_nb4k0"]
+[ext_resource type="Texture2D" uid="uid://dowccgscoiohq" path="res://assets/ui/icons/chest_icon.png" id="2_ks8t7"]
+[ext_resource type="Texture2D" uid="uid://d1sxm8cdxqbxw" path="res://assets/ui/icons/helmet_icon.png" id="3_tf0e0"]
+[ext_resource type="Texture2D" uid="uid://bjnx3ou88s4sh" path="res://assets/ui/icons/chestplate_icon.png" id="4_obcwv"]
+[ext_resource type="Texture2D" uid="uid://3xtsrbjrbt1w" path="res://assets/ui/icons/legs_icon.png" id="5_bo1jx"]
+[ext_resource type="PackedScene" uid="uid://cteamu70yyjtq" path="res://ui/equipment_slot.tscn" id="6_obcwv"]
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=2048107569]
+script = ExtResource("1_nb4k0")
 
-[node name="Control" type="Control" parent="." unique_id=2061476715]
-layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -34.0
-offset_right = 74.0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="Control" unique_id=2019799207]
-layout_mode = 0
+[node name="GoldLabel" type="Label" parent="." unique_id=2019799207]
 offset_left = 11.0
-offset_top = 1.0
+offset_top = 615.0
 offset_right = 101.0
-offset_bottom = 24.0
+offset_bottom = 638.0
 text = "GOLD: 100g"
+
+[node name="ToggleInventoryButton" type="Button" parent="." unique_id=390057275]
+offset_left = 14.0
+offset_top = 569.0
+offset_right = 54.0
+offset_bottom = 609.0
+focus_mode = 0
+icon = ExtResource("2_ks8t7")
+
+[node name="InventoryPanel" type="Panel" parent="." unique_id=1539974141]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.8
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="InventoryPanel" unique_id=61915273]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+allow_reselect = true
+
+[node name="EquipmentList" type="Panel" parent="InventoryPanel" unique_id=1165267207]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.40000916
+offset_right = -0.3999939
+grow_vertical = 2
+
+[node name="ArmorContainer" type="BoxContainer" parent="InventoryPanel/EquipmentList" unique_id=462973653]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -52.0
+offset_right = 41.5
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HelmetSlot" parent="InventoryPanel/EquipmentList/ArmorContainer" unique_id=495994209 instance=ExtResource("6_obcwv")]
+layout_mode = 2
+text = "NONE"
+icon = ExtResource("3_tf0e0")
+slot = 2
+empty_icon = ExtResource("3_tf0e0")
+
+[node name="ChestSlot" parent="InventoryPanel/EquipmentList/ArmorContainer" unique_id=175259995 instance=ExtResource("6_obcwv")]
+layout_mode = 2
+text = "NONE
+"
+icon = ExtResource("4_obcwv")
+slot = 3
+empty_icon = ExtResource("4_obcwv")
+
+[node name="LegSlot" parent="InventoryPanel/EquipmentList/ArmorContainer" unique_id=522809888 instance=ExtResource("6_obcwv")]
+layout_mode = 2
+text = "NONE"
+icon = ExtResource("5_bo1jx")
+slot = 4
+empty_icon = ExtResource("5_bo1jx")
+
+[connection signal="pressed" from="ToggleInventoryButton" to="." method="_on_toggle_inventory_button_pressed"]

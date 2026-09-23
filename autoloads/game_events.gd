@@ -2,11 +2,8 @@ extends Node
 
 signal slot_machine_opened
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+signal slot_machine_closed
 
+signal shop_opened
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+signal shop_closed

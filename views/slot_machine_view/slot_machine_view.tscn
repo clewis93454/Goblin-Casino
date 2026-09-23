@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://c4iuyx46ljdvu"]
+
+[ext_resource type="Script" uid="uid://1fsjsq4pjfgf" path="res://views/slot_machine_view/slot_machine_view.gd" id="1_a4qfr"]
+[ext_resource type="Texture2D" uid="uid://brucp1jhfofc7" path="res://assets/slot_machine_close/slot_machine_base.png" id="1_otb8r"]
+[ext_resource type="Texture2D" uid="uid://bm3a13mu8fmjj" path="res://assets/slot_machine_close/lever long.png" id="2_bov86"]
+[ext_resource type="Texture2D" uid="uid://c0c2igt22d3dr" path="res://assets/slot_machine_close/lever short.png" id="3_ta1d8"]
+[ext_resource type="SpriteFrames" uid="uid://c20m1c35mv0to" path="res://assets/slot_machine_close/ticker_animation.tres" id="5_vb1e8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bov86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ta1d8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ta1d8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ta1d8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bov86")
+}],
+"loop": 0,
+"name": &"pull",
+"speed": 5.0
+}]
+
+[node name="SlotMachineLevel" type="Node2D" unique_id=101160171]
+script = ExtResource("1_a4qfr")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2052399750]
+zoom = Vector2(1.5, 1.5)
+
+[node name="Body" type="Sprite2D" parent="." unique_id=2133285786]
+position = Vector2(1.0000076, -7.6293945e-06)
+scale = Vector2(1.8014706, 1.8014706)
+texture = ExtResource("1_otb8r")
+
+[node name="Lever" type="AnimatedSprite2D" parent="Body" unique_id=22156667]
+position = Vector2(72.71835, 3.8146973e-06)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"pull"
+frame = 4
+frame_progress = 1.0
+
+[node name="LeftTicker" type="AnimatedSprite2D" parent="Body" unique_id=1642547473]
+texture_filter = 1
+position = Vector2(-31.085716, -11.65714)
+scale = Vector2(0.72969735, 0.7865043)
+sprite_frames = ExtResource("5_vb1e8")
+animation = &"spin"
+
+[node name="MiddleTicker" type="AnimatedSprite2D" parent="Body" unique_id=1689143771]
+texture_filter = 1
+position = Vector2(1.6653023, -11.657139)
+scale = Vector2(0.72969735, 0.7865043)
+sprite_frames = ExtResource("5_vb1e8")
+animation = &"spin"
+
+[node name="RightTicker" type="AnimatedSprite2D" parent="Body" unique_id=1999276625]
+texture_filter = 1
+position = Vector2(34.41632, -11.657139)
+scale = Vector2(0.72969735, 0.7865043)
+sprite_frames = ExtResource("5_vb1e8")
+animation = &"spin"
+
+[node name="PullLabel" type="Label" parent="." unique_id=519036630]
+offset_left = 151.0
+offset_top = -51.0
+offset_right = 208.0
+offset_bottom = -28.0
+text = "(E) Pull!"
+
+[node name="PayoutLabel" type="Label" parent="." unique_id=1366272412]
+offset_left = -42.0
+offset_top = 35.0
+offset_right = 48.0
+offset_bottom = 58.0
+text = "Payout: 000"
+vertical_alignment = 1
+
+[node name="ExitLabel" type="Label" parent="." unique_id=891844253]
+offset_left = -370.0
+offset_top = -203.0
+offset_right = -298.0
+offset_bottom = -180.0
+text = "Exit (esc) "
+
+[node name="CostLabel" type="Label" parent="." unique_id=183475368]
+offset_left = 155.0
+offset_top = -12.0
+offset_right = 216.0
+offset_bottom = 11.0
+text = "Cost: 5g"

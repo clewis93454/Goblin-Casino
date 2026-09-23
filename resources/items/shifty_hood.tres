@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bs1vvkh1ndrpg"]
+
+[ext_resource type="Texture2D" uid="uid://mli40er2cnju" path="res://assets/ui/icons/items/shifty_hood_icon.png" id="1_uvjt5"]
+[ext_resource type="Script" uid="uid://b1csalha2y0y5" path="res://data_classes/item.gd" id="2_2ab6x"]
+
+[resource]
+script = ExtResource("2_2ab6x")
+id = &"2"
+display_name = "Shifty Hood"
+icon = ExtResource("1_uvjt5")
+description = "Sometimes allows you to play a game without spending the wager amount."
+slot = 2
+value = 55
+metadata/_custom_type_script = "uid://b1csalha2y0y5"

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cteamu70yyjtq"]
+
+[ext_resource type="Script" uid="uid://ckdlw8wd5go78" path="res://ui/equipment_slot.gd" id="1_0pla6"]
+
+[node name="EquipmentSlot" type="Button" unique_id=495994209]
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+script = ExtResource("1_0pla6")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

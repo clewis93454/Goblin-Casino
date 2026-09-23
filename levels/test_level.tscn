@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://egmv6e0qb5rq" path="res://assets/castle/mainlevbuild.png" id="1_gojnm"]
 [ext_resource type="PackedScene" uid="uid://cdcd1wwdobiba" path="res://games/slot_machine.tscn" id="2_x25rp"]
+[ext_resource type="PackedScene" uid="uid://bsomesay3vc8n" path="res://npcs/shopkeeper.tscn" id="3_gmgay"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7jktm"]
 texture = ExtResource("1_gojnm")
@@ -972,3 +973,6 @@ tile_set = SubResource("TileSet_g4v7s")
 
 [node name="SlotMachine" parent="." unique_id=1724728350 instance=ExtResource("2_x25rp")]
 position = Vector2(80, 0)
+
+[node name="Shopkeeper" parent="." unique_id=1210366095 instance=ExtResource("3_gmgay")]
+position = Vector2(162, 63)
