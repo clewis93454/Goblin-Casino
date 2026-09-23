@@ -1,3 +1,6 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Leftover temp files from interrupted editor saves
+*.tmp
