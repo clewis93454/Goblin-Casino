@@ -1,7 +1,13 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://bs1vvkh1ndrpg"]
 
+[ext_resource type="Script" uid="uid://rrrb4vx7ns0y" path="res://data_classes/effects/item_effect.gd" id="1_2yiqq"]
 [ext_resource type="Texture2D" uid="uid://mli40er2cnju" path="res://assets/ui/icons/items/shifty_hood_icon.png" id="1_uvjt5"]
 [ext_resource type="Script" uid="uid://b1csalha2y0y5" path="res://data_classes/item.gd" id="2_2ab6x"]
+[ext_resource type="Script" uid="uid://cu55kuwadoja8" path="res://data_classes/effects/wager_waive_chance_effect.gd" id="2_83ghs"]
+
+[sub_resource type="Resource" id="Resource_g4v7s"]
+script = ExtResource("2_83ghs")
+metadata/_custom_type_script = "uid://cu55kuwadoja8"
 
 [resource]
 script = ExtResource("2_2ab6x")
@@ -11,4 +17,5 @@ icon = ExtResource("1_uvjt5")
 description = "Sometimes allows you to play a game without spending the wager amount."
 slot = 2
 value = 55
+effects = Array[ExtResource("1_2yiqq")]([SubResource("Resource_g4v7s")])
 metadata/_custom_type_script = "uid://b1csalha2y0y5"

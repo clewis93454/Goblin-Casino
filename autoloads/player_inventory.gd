@@ -1,13 +1,6 @@
 extends InventoryComponent
 
-signal helmet_equipped(helmet: Item)
-
 var equipment: EquipmentComponent = EquipmentComponent.new()
-
-var helmet_slot: Item = null:
-	set(helmet):
-		helmet_slot = helmet
-		helmet_equipped.emit(helmet)
 
 
 func _ready() -> void:
@@ -35,13 +28,3 @@ func unequip_to_inventory(slot: Item.Slot) -> void:
 
 	if item:
 		add_item(item)
-
-
-func equip_helmet(helmet: Item):
-	helmet_slot = helmet
-	remove_item(helmet)
-
-
-func unequip_helmet():
-	add_item(helmet_slot)
-	helmet_slot = null

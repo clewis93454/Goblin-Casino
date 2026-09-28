@@ -9,4 +9,4 @@ enum Slot { CONSUMABLE, JUNK, HELM, CHEST, LEGS }
 @export var description: String
 @export var slot: Slot
 @export var value: int
-# TODO: add an effect here to be used later during games
+@export var effects: Array[ItemEffect] = []

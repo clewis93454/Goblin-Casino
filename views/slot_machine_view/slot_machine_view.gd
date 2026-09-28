@@ -3,6 +3,7 @@ extends Node
 const MAX_VALUES: int = 7
 const TICKER_ITERATIONS: int = 10
 const DEFAULT_COST: int = 5
+const DEFAULT_PAYOUT: int = 10
 
 @onready var lever: AnimatedSprite2D = $Body/Lever
 @onready var left_ticker: AnimatedSprite2D = $Body/LeftTicker
@@ -25,40 +26,51 @@ func _ready() -> void:
 	can_pull = true
 
 
-func _on_equipment_changed(_slot: Item.Slot, _item: Item):
+func create_context() -> CasinoGameContext:
+	return CasinoGameContext.new(CasinoGameContext.Game.SLOTS, DEFAULT_COST, DEFAULT_PAYOUT)
+
+
+func _on_equipment_changed(_slot: Item.Slot, _item: Item) -> void:
 	update_cost_label()
 
 
 func update_cost_label() -> void:
-	cost_label.text = "Cost: %dg" % calculate_pull_cost()
+	cost_label.text = "Cost: %dg" % calculate_pull_cost(create_context())
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact") && can_pull && PlayerInventory.gold >= 10:
-		handle_lever_pull()
+	if event.is_action_pressed("interact") && can_pull:
+		var context: CasinoGameContext = create_context()
+		var cost: int = calculate_pull_cost(context)
+
+		if PlayerInventory.gold >= cost:
+			handle_lever_pull(cost, context)
 
 	if event.is_action_pressed("escape") && can_pull:
 		GameEvents.slot_machine_closed.emit()
 
 
-func handle_lever_pull() -> void:
+func handle_lever_pull(cost: int, context: CasinoGameContext) -> void:
 	can_pull = false
 	pull_label.visible = false
-	PlayerInventory.remove_gold(calculate_pull_cost())
+
+	if not PlayerInventory.equipment.should_waive_wager(context):
+		PlayerInventory.remove_gold(cost)
+
 	lever.play("pull")
 	payout_label.text = "Payout: 000"
 	seed_tickers()
 
 
 func _on_lever_pull_finish() -> void:
-	animate_tickers()
-
+	await animate_tickers()
+	calculate_score(left_ticker_order.back(), middle_ticker_order.back(), right_ticker_order.back())
 
 func animate_tickers() -> void:
 	await play_ticker_sequence(left_ticker, left_ticker_order)
 	await play_ticker_sequence(middle_ticker, middle_ticker_order)
 	await play_ticker_sequence(right_ticker, right_ticker_order)
-	calculate_score(left_ticker_order.back(), middle_ticker_order.back(), right_ticker_order.back())
+
 	can_pull = true
 	pull_label.visible = true
 
@@ -85,39 +97,47 @@ func generate_random_ticker_order() -> Array[int]:
 	var ticker_array: Array[int] = []
 
 	for i in TICKER_ITERATIONS:
-		var random_int = randi_range(0, MAX_VALUES - 1)
+		var random_int: int = randi_range(0, MAX_VALUES - 1)
 		ticker_array.push_back(random_int)
 
 	return ticker_array
 
 
-func calculate_score(left_ticker_value: int, middle_ticker_value: int, right_ticker_value: int):
+func calculate_score(
+	left_ticker_value: int, middle_ticker_value: int, right_ticker_value: int
+) -> void:
+	var context: CasinoGameContext = create_context()
+	var payout: int
+
+	# jackpot
 	if left_ticker_value == middle_ticker_value && left_ticker_value == right_ticker_value:
-		payout_label.text = "Payout: 100"
-		PlayerInventory.add_gold(100)
+		payout = PlayerInventory.equipment.get_modified_payout(context) * 10
+		payout_label.text = "Payout: %s" % payout
+		PlayerInventory.add_gold(payout)
 		return
 
+	# wins
 	if left_ticker_value == middle_ticker_value:
-		payout_label.text = "Payout: 010"
-		PlayerInventory.add_gold(10)
+		payout = PlayerInventory.equipment.get_modified_payout(context)
+		payout_label.text = "Payout: %s" % payout
+		PlayerInventory.add_gold(payout)
 		return
 
 	if left_ticker_value == right_ticker_value:
-		payout_label.text = "Payout: 010"
-		PlayerInventory.add_gold(10)
+		payout = PlayerInventory.equipment.get_modified_payout(context)
+		payout_label.text = "Payout: %s" % payout
+		PlayerInventory.add_gold(payout)
 		return
 
 	if right_ticker_value == middle_ticker_value:
-		payout_label.text = "Payout: 010"
-		PlayerInventory.add_gold(10)
+		payout = PlayerInventory.equipment.get_modified_payout(context)
+		payout_label.text = "Payout: %s" % payout
+		PlayerInventory.add_gold(payout)
 		return
 
+	# loss
 	payout_label.text = "Payout: 000"
 
 
-func calculate_pull_cost() -> int:
-	var helm: Item = PlayerInventory.equipment.get_equipped(Item.Slot.HELM)
-	if helm and helm.id == "1":
-		return DEFAULT_COST - 1
-
-	return DEFAULT_COST
+func calculate_pull_cost(context: CasinoGameContext) -> int:
+	return PlayerInventory.equipment.get_modified_cost(context)
