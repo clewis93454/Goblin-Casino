@@ -8,6 +8,10 @@ Goblin Casino is a fantasy-themed casino game built around a collection of gambl
 
 Engine: Godot 4.7, GDScript, Forward Plus renderer, Jolt Physics. Main scene is `game.tscn` / `game.gd` (currently a placeholder `Node2D`).
 
+## Roadmap
+
+`docs/ROADMAP.md` is the guiding structure for all changes. Read it before answering architecture questions or proposing changes, keep work consistent with its milestones, decisions, and requirements, and point out when a request conflicts with it or jumps ahead of the milestone order. Don't assume answers to its open decisions.
+
 ## Running the Project
 
 There is no separate build step — Godot projects run directly from the editor or CLI.
