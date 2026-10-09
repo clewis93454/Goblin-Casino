@@ -1,4 +1,4 @@
-# Conjuring Casino
+# Goblin Casino
 
 A fantasy-themed casino game built around a collection of gambling minigames. Wander the casino floor, try your luck at the machines, and trade gear with the shopkeeper.
 

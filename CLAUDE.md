@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Conjuring Casino is a fantasy-themed casino game built around a collection of gambling minigames (cards, slots, roulette, etc.). It's a personal learning project for the user to learn Godot — treat it as such (see "Working with Claude" below).
+Goblin Casino is a fantasy-themed casino game built around a collection of gambling minigames (cards, slots, roulette, etc.). It's a personal learning project for the user to learn Godot — treat it as such (see "Working with Claude" below).
 
 Engine: Godot 4.7, GDScript, Forward Plus renderer, Jolt Physics. Main scene is `game.tscn` / `game.gd` (currently a placeholder `Node2D`).
 

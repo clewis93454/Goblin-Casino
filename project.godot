@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Conjuring Casino"
+config/name="Goblin Casino"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 
